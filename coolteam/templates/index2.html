@@ -1,0 +1,218 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+
+    <link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap" rel="stylesheet" />
+    <title>팀원 상세페이지</title>
+</head>
+<style>
+    * {
+        font-family: "Gowun Dodum", sans-serif;
+    }
+
+    .profile {
+        width: 1300px;
+        height: 550px;
+        padding: auto;
+
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .bucket_input {
+        width: 95%;
+        max-width: 700px;
+        padding: 10px;
+        margin: 15px auto;
+    }
+
+    .bucket_show {
+        width: 95%;
+        max-width: 700px;
+        padding: 10px;
+        box-shadow: 0px 0px 10px 0px lightblue;
+        margin: 15px auto;
+    }
+
+    .mybucket {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+
+        width: 95%;
+        max-width: 700px;
+        box-shadow: 0px 0px 10px 0px lightblue;
+        padding: 10px;
+        margin: 15px auto;
+
+    }
+
+    .mybucket>input {
+        width: 70%;
+    }
+
+    .bucket_show>li {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+
+        margin-bottom: 10px;
+        min-height: 30px;
+    }
+
+    .bucket_show>li>h2 {
+        max-width: 75%;
+        font-size: 20px;
+        font-weight: 500;
+        margin-right: auto;
+        margin-bottom: 0px;
+    }
+
+    .mybox>li>h2.done {
+        text-decoration: line-through;
+    }
+
+    .cheering {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+
+        width: 95%;
+        max-width: 800px;
+        box-shadow: 0px 0px 10px 0px grey;
+        padding: 10px;
+        margin: 15px auto;
+
+    }
+
+    .nickname {
+        width: 200px;
+        height: 100px;
+        margin-right: 10px;
+    }
+
+    .cheering_input {
+        width: 500px;
+        height: 100px;
+    }
+
+    .cheering > button {
+        width: 120px;
+        margin-left: 10px;
+        margin-top: 60px;
+    }
+    
+
+    .cheering_table {
+        max-width: 700px;
+        margin: auto;
+        margin-top: 30px;
+    }
+</style>
+
+<body>
+    <div class="profile">
+        <div class="profileimage">
+            <div class="card" style="width: 15rem;">
+                <img src="https://ca.slack-edge.com/T043597JK8V-U052A36HD5L-365da9f660d8-512" class="card-img-top"
+                    alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">김세령</h5>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">첫 번째 TMI</li>
+                    <li class="list-group-item">두 번째 TMI</li>
+                    <li class="list-group-item">세 번째 TMI</li>
+                </ul>
+                <div class="card-body">
+                    <a href="#" class="card-link">블로그</a>
+                    <a href="eshika@naver.com" class="card-link">이메일</a>
+                </div>
+            </div>
+        </div>
+        <div class="bucket_input">
+            <div class="mybucket">
+                <input id="bucket" class="form-control" type="text" placeholder="이루고 싶은 것을 입력하세요" />
+                <button onclick="save_bucket()" type="button" class="btn btn-outline-primary">기록하기</button>
+            </div>
+            <div class="bucket_show" id="bucket-list">
+                <li>
+                    <h2>✅ 호주에서 스카이다이빙 하기</h2>
+                </li>
+                <li>
+                    <h2>✅ 비전공자 탈출하기</h2>
+                </li>
+            </div>
+        </div>
+    </div>
+    <div class="cheering">
+        <div class="nickname">
+            <div class="form-floating">
+                <textarea class="form-control" placeholder="Leave a nickname here" id="floatingTextarea2"
+                    style="height: 100px"></textarea>
+                <label for="floatingTextarea">닉네임</label>
+            </div>
+        </div>
+        <div class="cheering_input">
+            <div class="form-floating">
+                <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2"
+                    style="height: 100px"></textarea>
+                <label for="floatingTextarea2">응원 댓글을 달아주세요!</label>
+            </div>
+        </div>
+        <button type="button" class="btn btn-outline-dark">응원 남기기</button>
+    </div>
+    <div class="cheering_table">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">닉네임</th>
+                    <th scope="col">응원내용</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th scope="row">1</th>
+                    <td>Mark</td>
+                    <td>화이팅!</td>
+                </tr>
+                <tr>
+                    <th scope="row">2</th>
+                    <td>Jacob</td>
+                    <td>거의 다 왔어요!</td>
+                </tr>
+                <tr>
+                    <th scope="row">3</th>
+                    <td>Larry the Bird</td>
+                    <td>조금만 더 열심히 해봐요!</td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+    <script>
+        function save_comment() {
+            let nickname = $('#nickname').val();
+            let comments = $('#comments').val();
+        }
+    </script>
+</body>
+
+
+</html>
