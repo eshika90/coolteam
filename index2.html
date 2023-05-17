@@ -22,6 +22,77 @@
             font-family: "Noto Serif KR", serif;
         }
 
+        .totalwrap {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .topwrap {
+            display: flex;
+            flex-direction: row;
+        }
+
+        .bucketbox {
+            height: 500px;
+            width: 1200px;
+
+            background-image:
+                url("https://images.unsplash.com/photo-1510759591315-6425cba413fe?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8N3x8d2lzaHxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=800&q=60");
+            background-position: center;
+            background-size: cover;
+        }
+
+        .bucketbox>h1 {
+            text-align: center;
+            font-size: 50px;
+            color: white;
+            padding: 40px 0px 0px 0px;
+        }
+
+        .mybucket {
+            padding: 20px;
+            border-radius: 30px;
+            box-shadow: 0px 0px 10px 0px rgb(76, 82, 83);
+            margin: 40px 20px auto 20px;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .mybucket>input {
+            width: 90%;
+        }
+
+        .myboxlist {
+            border-radius: 30px;
+            flex-direction: column;
+            padding: 20px;
+            box-shadow: 0px 0px 10px 0px rgb(76, 82, 83);
+            margin: 10px 20px auto 20px;
+            justify-content: space-between;
+            align-items: center;
+            width: auto;
+            height: 250px;
+            overflow: auto;
+
+        }
+
+        .list {
+            flex-direction: row;
+            border-radius: 30px;
+            box-shadow: 0px 0px 10px 0px rgb(76, 82, 83);
+            width: auto;
+            height: 50px;
+            color: white;
+            font-size: 10px;
+            text-align: center;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            padding: 5px 20px 10px 40px;
+        }
+
         .cheering {
             width: 600px;
             display: flex;
@@ -74,8 +145,59 @@
     <script>
         $(document).ready(function () {
             show_comment();
+            show_bucket();
         });
 
+        function save_bucket() {
+            let bucket = $('#bucket').val()
+
+            let formData = new FormData();
+            formData.append("bucket_give", bucket);
+
+            fetch('/bucket', { method: "POST", body: formData, }).then((res) => res.json()).then((data) => {
+                alert(data["msg"]);
+                window.location.reload()
+            });
+        }
+
+        function show_bucket() {
+            $.ajax({
+                type: 'GET',
+                url: '/bucket',
+                data: {},
+                success: function (response) {
+                    let rows = response['result']
+                    $('#bucket-list').empty();
+                    for (let i = 0; i < rows.length; i++) {
+                        let bucket = rows[i]['bucket']
+                        let num = rows[i]['num']
+
+                        let temp_html = `<div class="list">
+                                            <h2>${bucket}</h2>
+                                            <button onclick="complete_bucket(${num})" type="button" class="btn btn-outline-primary">완료</button>
+                                        </div>`
+                        $('#bucket-list').append(temp_html)
+                    }
+                }
+            })
+        }
+
+        function complete_bucket(num) {
+            if (confirm('완료하셨나요?')) {
+                $.ajax({
+                    type: 'POST',
+                    url: '/bucket/delete',
+                    data: {
+                        delete_give: num
+                    },
+                    success: function (response) {
+                        alert(response['msg']);
+                        window.location.reload();
+                    }
+                });
+            }
+        }
+        
         function save_comment() {
             let name = $('#name').val()
             let comment = $('#comment').val()
@@ -101,18 +223,12 @@
                         let name = rows[i]['name']
                         let comment = rows[i]['comment']
                         let num = rows[i]['num']
-                        let done = rows[i]['done']
 
-                        let temp_html = ``
-                        if (done == 0) {
-                            temp_html = `<tr>
-                                                <td>${name}</td>
-                                                <td>${comment}</td>
-                                                <td><button onclick="deleteStar(${num})" type="button" class="btn-light" id="delete-btn">X</button></td>
-                                            </tr>`
-                        } else {
-                            temp_html = ``
-                        }
+                        let temp_html = `<tr>
+                                            <td>${name}</td>
+                                            <td>${comment}</td>
+                                            <td><button onclick="deleteStar(${num})" type="button" class="btn-light" id="delete-btn">X</button></td>
+                                        </tr>`
                         $('#comment-list').append(temp_html)
                     }
                 }
@@ -120,71 +236,108 @@
         }
 
         function deleteStar(num) {
-            $.ajax({
-                type: 'POST',
-                url: '/guestbook/delete',
-                data: {
-                    delete_give: num
-                },
-                success: function (response) {
-                    alert(response['msg']);
-                    window.location.reload();
-                }
-            });
+            if (confirm('댓글을 정말로 삭제하시겠습니까?')) {
+                $.ajax({
+                    type: 'POST',
+                    url: '/guestbook/delete',
+                    data: {
+                        delete_give: num
+                    },
+                    success: function (response) {
+                        alert(response['msg']);
+                        window.location.reload();
+                    }
+                });
+            }
         }
 
     </script>
 </head>
 
 <body>
-    <div class="cheering">
-        <div class="nick_button">
-            <div class="nicknameinput">
-                <div class="form-floating">
-                    <input type="text" class="form-control" id="name" placeholder="닉네임" />
-                    <label for="floatingInput">닉네임</label>
+    <div class="totalwrap">
+        <div class="topwrap">
+            <div class="profile">
+                <div class="profileimage">
+                    <div class="card" style="width: 15rem;">
+                        <img src="https://ca.slack-edge.com/T043597JK8V-U052A36HD5L-365da9f660d8-512"
+                            class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">김세령</h5>
+                        </div>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">첫 번째 TMI</li>
+                            <li class="list-group-item">두 번째 TMI</li>
+                            <li class="list-group-item">세 번째 TMI</li>
+                        </ul>
+                        <div class="card-body">
+                            <a href="#" class="card-link">블로그</a>
+                            <a href="eshika@naver.com" class="card-link">이메일</a>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <button onclick="save_comment()" type="button" class="btn btn-dark">
-                댓글 남기기
-            </button>
-        </div>
-        <div class="commentinput">
-            <div class="form-floating">
-                <textarea class="form-control" placeholder="응원 댓글을 남겨주세요!" id="comment"
-                    style="height: 115px"></textarea>
-                <label for="floatingTextarea2">응원 댓글을 남겨주세요!</label>
+            <div class="bucketbox">
+                <h1>나의 weekly 버킷리스트</h1>
+                <div class="mybucket">
+                    <input id="bucket" class="form-control" type="text" placeholder="이번주에 이루고 싶은 것을 입력하세요" />
+                    <button onclick="save_bucket()" type="button" class="btn btn-outline-danger">담기</button>
+                </div>
+                <div class="myboxlist" id="bucket-list">
+                    <div class="list">
+                        <h2>호주에서 스카이다이빙 하기</h2>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="comment-table">
-        <table class="table">
-            <thead>
-                <tr>
-                    <th scope="col">닉네임</th>
-                    <th scope="col">응원내용</th>
-                    <th scope="col"></th>
-                </tr>
-            </thead>
-            <tbody id="comment-list">
-                <tr>
-                    <th scope="row">1</th>
-                    <td>Mark</td>
-                    <td>화이팅!</td>
-                </tr>
-                <tr>
-                    <th scope="row">2</th>
-                    <td>Jacob</td>
-                    <td>거의 다 왔어요!</td>
-                </tr>
-                <tr>
-                    <th scope="row">3</th>
-                    <td>Larry the Bird</td>
-                    <td>조금만 더 열심히 해봐요!</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
+        <div class="cheering">
+            <div class="nick_button">
+                <div class="nicknameinput">
+                    <div class="form-floating">
+                        <input type="text" class="form-control" id="name" placeholder="닉네임" />
+                        <label for="floatingInput">닉네임</label>
+                    </div>
+                </div>
+                <button onclick="save_comment()" type="button" class="btn btn-dark">
+                    댓글 남기기
+                </button>
+            </div>
+            <div class="commentinput">
+                <div class="form-floating">
+                    <textarea class="form-control" placeholder="응원 댓글을 남겨주세요!" id="comment"
+                        style="height: 115px"></textarea>
+                    <label for="floatingTextarea2">응원 댓글을 남겨주세요!</label>
+                </div>
+            </div>
+        </div>
+        <div class="comment-table">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">닉네임</th>
+                        <th scope="col">응원내용</th>
+                        <th scope="col"></th>
+                    </tr>
+                </thead>
+                <tbody id="comment-list">
+                    <tr>
+                        <th scope="row">1</th>
+                        <td>Mark</td>
+                        <td>화이팅!</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">2</th>
+                        <td>Jacob</td>
+                        <td>거의 다 왔어요!</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">3</th>
+                        <td>Larry the Bird</td>
+                        <td>조금만 더 열심히 해봐요!</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
 </body>
 
 </html>
