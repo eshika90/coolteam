@@ -18,8 +18,14 @@
     <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@200;300;400;500;600;700;900&display=swap"
         rel="stylesheet" />
     <style>
+        @font-face {
+            font-family:'vtfont';
+            src:url('//tistory4.daumcdn.net/tistory/214191/skin/images/NeoDunggeunmo.ttf') format('truetype');
+            font-style:normal;
+            font-weight:normal;
+        }
         * {
-            font-family: "Noto Serif KR", serif;
+            font-family: 'vtfont'
         }
 
         .totalwrap {
@@ -36,40 +42,51 @@
             height: 500px;
             width: 1200px;
 
-            background-image:
-                url("https://images.unsplash.com/photo-1510759591315-6425cba413fe?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8N3x8d2lzaHxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=800&q=60");
-            background-position: center;
-            background-size: cover;
+            background-color: rgb(255 172 228);
+            border: solid black;
+
+            margin: 20px 400px 20px 150px;
         }
 
         .bucketbox>h1 {
             text-align: center;
-            font-size: 50px;
-            color: white;
+            font-size: 20px;
+            color: rgb(57 25 160);
             padding: 40px 0px 0px 0px;
+        }
+        .bucket_title {
+            width: auto;
+            height: 40px;
+
+            background-color: rgb(57 25 160);
+            color: rgb(255 172 228);
+            text-align: center;
+
+            padding: 10px 10px 10px 10px;
+            margin: 5px 5px 5px 5px;
         }
 
         .mybucket {
-            padding: 20px;
-            border-radius: 30px;
-            box-shadow: 0px 0px 10px 0px rgb(76, 82, 83);
-            margin: 40px 20px auto 20px;
+            width:auto;
+            height: auto;
+            padding: 10px 10px 10px 10px;
+            margin: 40px 5px auto 5px;
             display: flex;
             flex-direction: row;
             align-items: center;
             justify-content: space-between;
+            border: solid rgb(57 25 160);
         }
 
         .mybucket>input {
-            width: 90%;
+            width: 70%;
         }
 
         .myboxlist {
-            border-radius: 30px;
+            border: solid rgb(57 25 160);
             flex-direction: column;
             padding: 20px;
-            box-shadow: 0px 0px 10px 0px rgb(76, 82, 83);
-            margin: 10px 20px auto 20px;
+            margin: 10px 5px auto 5px;
             justify-content: space-between;
             align-items: center;
             width: auto;
@@ -80,17 +97,17 @@
 
         .list {
             flex-direction: row;
-            border-radius: 30px;
-            box-shadow: 0px 0px 10px 0px rgb(76, 82, 83);
             width: auto;
-            height: 50px;
-            color: white;
-            font-size: 10px;
-            text-align: center;
+            height: 30px;
+            color: black;
             margin-bottom: 10px;
             display: flex;
             justify-content: space-between;
-            padding: 5px 20px 10px 40px;
+            background-color: rgb(255 172 228);
+        }
+
+        .list>h2 {
+            font-size: 25px;
         }
 
         .cheering {
@@ -278,6 +295,7 @@
                 </div>
             </div>
             <div class="bucketbox">
+                <div class="bucket_title">이번주 목표를 정해보아요!</div>
                 <h1>나의 weekly 버킷리스트</h1>
                 <div class="mybucket">
                     <input id="bucket" class="form-control" type="text" placeholder="이번주에 이루고 싶은 것을 입력하세요" />
@@ -286,6 +304,7 @@
                 <div class="myboxlist" id="bucket-list">
                     <div class="list">
                         <h2>호주에서 스카이다이빙 하기</h2>
+                        <button onclick="complete_bucket(num)" type="button" class="btn btn-outline-primary">완료</button>
                     </div>
                 </div>
             </div>
