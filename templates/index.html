@@ -1,0 +1,315 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+
+    <title>쿨한 비전공자</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap" rel="stylesheet">
+
+    <style>
+        @font-face {
+            font-family: 'vtfont';
+            src: url('//tistory4.daumcdn.net/tistory/214191/skin/images/NeoDunggeunmo.ttf') format('truetype');
+            font-style: normal;
+            font-weight: normal;
+        }
+
+        * {
+            font-family: 'vtfont'
+        }
+
+        .mytitle {
+            width: 700px;
+            height: 100px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin: 50px auto auto auto;
+            text-align: center;
+        }
+
+        .title {
+            color: #fff;
+            text-shadow: 0 0 7px #fff, 0 0 10px #fff, 0 0 21px #fff, 0 0 42px #0fa,
+                0 0 82px #0fa, 0 0 92px #0fa, 0 0 102px #0fa, 0 0 151px #0fa;
+
+
+            font-size: 80px;
+        }
+
+        .title:hover {
+            text-shadow: 0 0 7px rgb(244, 243, 198), 0 0 10px rgb(230, 227, 50), 0 0 21px rgb(255, 179, 0), 0 0 42px rgb(255, 136, 0),
+                0 0 82px rgb(255, 94, 0), 0 0 92px rgb(255, 85, 0), 0 0 102px rgb(255, 89, 0), 0 0 151px rgb(255, 0, 0);
+
+        }
+
+        body {
+            background-image: linear-gradient(blue, pink, yellow)
+        }
+
+        #wrap {
+            width: 700px;
+            height: 220px;
+            margin: 0 auto;
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        #header {
+            width: 700px;
+            height: 25px;
+            font-size: 15px;
+            font-weight: bold;
+            text-align: center;
+            color: rgb(255, 127, 204);
+            margin: 5px auto 5px auto;
+        }
+
+        .teamintro {
+            font-size: 10px;
+        }
+
+        #nav {
+            width: 340px;
+            height: 210px;
+            margin-right: 10px;
+            box-shadow: 5px 5px 5px 1px gray;
+            display: flex;
+            flex-direction: column;
+            image-rendering: auto;
+            background-color: rgb(255 172 228);
+
+        }
+
+        .teamphoto {
+            border : 5px solid rgb(57 25 160);
+            width: 330px;
+            height: 200px;
+            margin:5px 5px 5px 5px;
+        }
+
+        #section {
+            width: 348px;
+            height: 210px;
+            background-color: rgb(255 172 228);
+            float: left;
+            box-shadow: 5px 5px 5px 1px gray;
+            
+
+        }
+
+        .insec{
+            width: 338px;
+            height: 200px;
+            border : 5px solid rgb(57 25 160);
+            margin: 5px 5px 5px 5px;
+            font-size: 20px;
+        }
+
+        .teamintro {
+            font-size: 20px;
+        }
+        #aside {
+            width: 700px;
+            height: 400px;
+            background-color:(255, 127, 204);
+            margin: 5px auto 50px auto;
+            padding: 10px 10px 10px 10px;
+            display: flex;
+            box-shadow: 0 0 7px #fff, 0 0 10px #fff, 0 0 21px #fff, 0 0 42px #0fa,
+                0 0 82px #0fa, 0 0 92px #0fa, 0 0 102px #0fa, 0 0 151px #0fa;
+
+            background-color: rgb(255 172 228);           
+        }
+
+        .btn {
+            width: 60px;
+            height: 25px;
+
+            background-color: rgb(57 25 160);
+            color: white;
+            font-size: 3px;
+            border: 1px solid rgb(57 25 160);
+            
+
+
+        }
+
+        .btn:hover {
+            border: 1px solid rgb(57 25 160);
+            box-shadow: 5px 5px 5px 1px gray; ;
+            color: #fff;
+            text-shadow: 0 0 7px #fff, 0 0 10px #fff, 0 0 21px #fff, 0 0 42px #0fa,
+                0 0 82px #0fa, 0 0 92px #0fa, 0 0 102px #0fa, 0 0 151px #0fa;
+        }
+
+        .cardname {
+            font-size: 10px;
+            font-weight: bold;
+
+        }
+
+        .cardname:hover {
+            color:white;
+            background-color: rgb(61, 60, 60);
+            text-shadow: 0 0 7px #fff, 0 0 10px #fff, 0 0 21px #fff, 0 0 42px #0fa,
+                0 0 82px #0fa, 0 0 92px #0fa, 0 0 102px #0fa, 0 0 151px #0fa;
+
+        }
+
+        .cardimg {
+            height: 207px;
+            width: 207px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin:0px auto 0px auto;
+
+        }
+
+        #imgedit {
+            border: 5px solid rgb(57 25 160);
+            background-color: rgb(255, 255, 255);
+        }
+
+        .co1 {
+            width: 150px;
+            border: 10px solid rgb(255 172 228);
+            
+        }
+
+
+
+        .cardbody {
+            height: 60px;
+            margin: 10px 5px 10px 5px;
+            padding: 0px 15px 0px 15px;
+            
+
+        }
+
+        .intro {
+            font-size: 10px;
+            
+        }
+
+        .cardbox{
+            width:150px;
+        }
+    </style>
+    <script>
+
+
+        $(document).ready(function () {
+            set_temp();
+
+        });
+        function set_temp() {
+            fetch("http://spartacodingclub.shop/sparta_api/weather/seoul").then((res) => res.json()).then((data) => {
+                let temp = data['temp']
+                $("#temp").text(temp)
+            })
+        }
+        function profile() {
+            window.open(`/detail_k`);
+
+
+        }
+        function blog() {
+            window.location.href = "https://velog.io/@eshika"
+        }
+
+        function profile2() {
+            window.open(`/detail_o`);
+
+
+        }
+        function blog2() {
+            window.location.href = "https://velog.io/@odong97"
+        }
+
+        function profile3() {
+            window.open(`/detail_l`);
+
+
+        }
+        function blog3() {
+            window.location.href = "https://velog.io/@lec2528"
+        }
+
+    </script>
+</head>
+
+<body>
+    <div class="mytitle">
+        <h1 class="title">'COOL'한 비전공자</h1>
+
+    </div>
+    <header class="header" id="header">
+        <p>현재기온:<span id="temp" id="time"> 36</span>도</p>
+    </header>
+    <div id="wrap">
+
+        <div id="nav">
+            <img class="teamphoto" src="https://6th10c.s3.ap-northeast-2.amazonaws.com/image/teamphoto.PNG">
+        </div>
+        <div id="section">
+            <div class="insec">
+            <p class="teamintro">
+                <p>'COOL'로 시작해서</p>
+                <p>'COOL'하게 코딩하고</p>
+                <p>'COOL'하게 취업하자!</p>
+            </p>
+            </div>
+        </div>
+    </div>
+    <div id="aside">
+      <div class="row row-cols-1 row-cols-md-3 g-3" id="cards-box">
+            <div class="col">
+                <div class="card h-100" id="imgedit">
+                    <img src="https://6th10c.s3.ap-northeast-2.amazonaws.com/image/seryeon.jpeg" class="cardimg">
+                    <div class="cardbody">
+                        <h5 class="cardname" onclick="profile()">김세령(팀장)</h5>
+                        <p class="intro">이름을 누르면 상세페이지로 이동합니다.</p>
+                        <button class="btn" onclick="blog()">blog</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card h-100" id="imgedit">
+                    <img src="https://6th10c.s3.ap-northeast-2.amazonaws.com/image/donghwan.png" class="cardimg">
+                    <div class="cardbody">
+                        <h5 class="cardname" onclick="profile2()">오동환(팀원)</h5>
+                        <p class="intro">이름을 누르면 상세페이지로 이동합니다.</p>
+                        <button class="btn" onclick="blog2()">blog</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card h-100" id="imgedit">
+                    <img src="https://6th10c.s3.ap-northeast-2.amazonaws.com/image/euncahn.jpg" class="cardimg">
+                    <div class="cardbody">
+                        <h5 class="cardname" onclick="profile3()">이은찬(팀원)</h5>
+                        <p class="intro">이름을 누르면 상세페이지로 이동합니다.</p>
+                        <button class="btn" onclick="blog3()">blog</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</body>
+
+</html>
